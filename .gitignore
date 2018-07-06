@@ -1,5 +1,5 @@
 node_modules/
 *.log
-dist/
+# dist/
 example/UpdateButtonDemo/dev
 .nyc_output/

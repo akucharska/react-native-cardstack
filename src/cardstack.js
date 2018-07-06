@@ -4,6 +4,9 @@ import calcHeight from './lib/calcHeight';
 
 const { Types, Properties } = LayoutAnimation;
 
+import PropTypes from 'prop-types';
+React.PropTypes = PropTypes;
+
 const ERROR_MESSAGE = 'CardStack component must have at least two child Card components. Please check the children of this CardStack instance.';
 const LONG_PRESS_THROTTLE = 400;
 
@@ -79,8 +82,8 @@ export default class CardStack extends React.Component {
 				key: cardIndex,
 				cardId: cardIndex,
 				height,
-				onPressIn: this.handlePressIn,
-				onPressOut: this.handlePressOut,
+				onPress: this.handlePressOut,
+				onPressOut: this.handlePressIn,
 			});
 		};
 		return this.props.children.map(cloneCard);
@@ -113,7 +116,7 @@ CardStack.propTypes = {
 CardStack.defaultProps = {
 	height: 600,
 	width: 350,
-	backgroundColor: 'f8f8f8',
+	backgroundColor: '#f8f8f8',
 	hoverOffset: 30,
 	transitionDuration: 300,
 };

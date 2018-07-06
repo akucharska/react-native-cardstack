@@ -16,6 +16,10 @@ var _calcHeight = require('./lib/calcHeight');
 
 var _calcHeight2 = _interopRequireDefault(_calcHeight);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27,6 +31,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Types = _reactNative.LayoutAnimation.Types,
     Properties = _reactNative.LayoutAnimation.Properties;
 
+_react2.default.PropTypes = _propTypes2.default;
 
 var ERROR_MESSAGE = 'CardStack component must have at least two child Card components. Please check the children of this CardStack instance.';
 var LONG_PRESS_THROTTLE = 400;
@@ -111,8 +116,8 @@ var CardStack = function (_React$Component) {
 					key: cardIndex,
 					cardId: cardIndex,
 					height: height,
-					onPressIn: _this3.handlePressIn,
-					onPressOut: _this3.handlePressOut
+					onPress: _this3.handlePressOut,
+					onPressOut: _this3.handlePressIn
 				});
 			};
 			return this.props.children.map(cloneCard);

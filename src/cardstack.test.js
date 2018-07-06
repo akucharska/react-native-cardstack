@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { shallow } from 'enzyme';
 
-import CardStack from './CardStack';
+import CardStack from './cardstack';
 
 describe('CardStack', () => {
 

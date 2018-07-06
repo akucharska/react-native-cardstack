@@ -64,7 +64,7 @@ Property           | Type   | Default | Description
 ------------------ | ------ | ------ | --------
 width       		   | number | 350px  | the width of the component
 height      		   | number | 500px  | the height of the component
-backgroundColor 	 | string | f8f8f8 | can be a hex or rgba value
+backgroundColor 	 | string | #f8f8f8 | can be a hex or rgba value
 transitionDuration | number | 300    | can be a hex or rgba value
 hoverOffset        | number | 30px   | how far the card will shift up when being hovered
 <br>
