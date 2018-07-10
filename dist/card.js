@@ -30,20 +30,14 @@ var Card = function (_React$Component) {
 
 		var _this = _possibleConstructorReturn(this, (Card.__proto__ || Object.getPrototypeOf(Card)).call(this));
 
-		_this.handlePressIn = _this.handlePressIn.bind(_this);
-		_this.handlePressOut = _this.handlePressOut.bind(_this);
+		_this.handlePress = _this.handlePress.bind(_this);
 		return _this;
 	}
 
 	_createClass(Card, [{
-		key: 'handlePressIn',
-		value: function handlePressIn() {
-			this.props.onPressIn(this.props.cardId);
-		}
-	}, {
-		key: 'handlePressOut',
-		value: function handlePressOut() {
-			this.props.onPressOut(this.props.cardId);
+		key: 'handlePress',
+		value: function handlePress() {
+			this.props.onPress(this.props.cardId);
 		}
 	}, {
 		key: 'render',
@@ -57,8 +51,8 @@ var Card = function (_React$Component) {
 				_extends({}, this.props, {
 					activeOpacity: 1,
 					style: [styles.container, this.props.style, cardStyles],
-					onPressIn: this.handlePressIn,
-					onPressOut: this.handlePressOut }),
+					onPress: this.handlePress
+				}),
 				this.props.children
 			);
 		}

@@ -4,17 +4,13 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 export default class Card extends React.Component {
 	constructor (props) {
 		super();
-		this.handlePressIn = this.handlePressIn.bind(this);
-		this.handlePressOut = this.handlePressOut.bind(this);
+		this.handlePress = this.handlePress.bind(this);
 	}
 
-	handlePressIn () {
-		this.props.onPressIn(this.props.cardId);
+	handlePress () {
+		this.props.onPress(this.props.cardId);
 	}
 
-	handlePressOut () {
-		this.props.onPressOut(this.props.cardId);
-	}
 
 	render () {
 		const cardStyles = {
@@ -26,8 +22,8 @@ export default class Card extends React.Component {
 				{...this.props}
 				activeOpacity={1}
 				style={[styles.container, this.props.style, cardStyles]}
-				onPressIn={this.handlePressIn}
-				onPressOut={this.handlePressOut}>
+				onPress={this.handlePress}
+			>
 				{this.props.children}
 			</TouchableOpacity>
 		);

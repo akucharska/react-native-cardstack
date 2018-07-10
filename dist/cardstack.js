@@ -47,8 +47,7 @@ var CardStack = function (_React$Component) {
 		var childrenLength = props.children && props.children.length || 1;
 		if (childrenLength <= 1) throw new Error(ERROR_MESSAGE);
 
-		_this.handlePressIn = _this.handlePressIn.bind(_this);
-		_this.handlePressOut = _this.handlePressOut.bind(_this);
+		_this.handlePress = _this.handlePress.bind(_this);
 
 		_this.state = {
 			selectedCardIndex: null,
@@ -74,6 +73,7 @@ var CardStack = function (_React$Component) {
 			_reactNative.LayoutAnimation.configureNext(this._PRESET);
 			var index = this.state.selectedCardIndex === cardId ? null : cardId;
 			this.setState({ selectedCardIndex: index });
+			if (!index) this.setState({ hoveredCardIndex: null });
 			if (this.props.onPress) this.props.onPress();
 		}
 	}, {
@@ -84,8 +84,8 @@ var CardStack = function (_React$Component) {
 			if (this.props.onLongPress) this.props.onLongPress();
 		}
 	}, {
-		key: 'handlePressIn',
-		value: function handlePressIn(cardId, cardSelected) {
+		key: 'handlePress',
+		value: function handlePress(cardId, cardSelected) {
 			var _this2 = this;
 
 			if (this.state.selectedCardIndex) return this.handleCardPress(cardId);
@@ -94,10 +94,6 @@ var CardStack = function (_React$Component) {
 			this._cardPressed = setTimeout(function () {
 				return _this2._cardPressed = clearTimeout(_this2._cardPressed);
 			}, LONG_PRESS_THROTTLE);
-		}
-	}, {
-		key: 'handlePressOut',
-		value: function handlePressOut(cardId) {
 			if (this._cardPressed) this.handleCardPress(cardId);else this.handleCardLongPress(cardId);
 		}
 	}, {
@@ -116,8 +112,7 @@ var CardStack = function (_React$Component) {
 					key: cardIndex,
 					cardId: cardIndex,
 					height: height,
-					onPress: _this3.handlePressOut,
-					onPressOut: _this3.handlePressIn
+					onPress: _this3.handlePress
 				});
 			};
 			return this.props.children.map(cloneCard);

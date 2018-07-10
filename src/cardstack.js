@@ -16,9 +16,8 @@ export default class CardStack extends React.Component {
 		const childrenLength = props.children && props.children.length || 1;
 		if (childrenLength <= 1) throw new Error(ERROR_MESSAGE);
 
-		this.handlePressIn = this.handlePressIn.bind(this);
-		this.handlePressOut = this.handlePressOut.bind(this);
-
+		this.handlePress = this.handlePress.bind(this);
+		
 		this.state = {
 			selectedCardIndex: null,
 			hoveredCardIndex: null,
@@ -41,6 +40,7 @@ export default class CardStack extends React.Component {
 		LayoutAnimation.configureNext(this._PRESET);
 		const index = (this.state.selectedCardIndex === cardId) ? null : cardId;
 		this.setState({ selectedCardIndex: index });
+		if(!index) this.setState({ hoveredCardIndex: null });
 		if (this.props.onPress) this.props.onPress();
 	}
 
@@ -50,20 +50,18 @@ export default class CardStack extends React.Component {
 		if (this.props.onLongPress) this.props.onLongPress();
 	}
 
-	handlePressIn (cardId, cardSelected) {
+	handlePress (cardId, cardSelected) {
 		if (this.state.selectedCardIndex) return this.handleCardPress(cardId);
 		LayoutAnimation.configureNext(this._PRESET);
 		this.setState({ hoveredCardIndex: cardId });
 		this._cardPressed = setTimeout(() =>
 			this._cardPressed = clearTimeout(this._cardPressed),
 			LONG_PRESS_THROTTLE
-		);
-	}
-
-	handlePressOut (cardId) {
+		); 
 		if (this._cardPressed) this.handleCardPress(cardId);
 		else this.handleCardLongPress(cardId);
 	}
+
 
 	renderCards () {
 		const cloneCard = (child, cardIndex, children) => {
@@ -82,8 +80,7 @@ export default class CardStack extends React.Component {
 				key: cardIndex,
 				cardId: cardIndex,
 				height,
-				onPress: this.handlePressOut,
-				onPressOut: this.handlePressIn,
+				onPress: this.handlePress
 			});
 		};
 		return this.props.children.map(cloneCard);
